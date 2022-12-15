@@ -1,5 +1,7 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
@@ -12,16 +14,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
-        userDaoJDBC.createUsersTable();
-        userDaoJDBC.saveUser("Anton", "Sukhankin", (byte) 22);
-        userDaoJDBC.saveUser("Geralt", "of Rivia", (byte) 100);
-        userDaoJDBC.saveUser("Yennefer", "of Vengerberg", (byte) 95);
-        userDaoJDBC.saveUser("Yarpen", "Zigrin", (byte) 42);
-        List<User> list = userDaoJDBC.getAllUsers();
+        UserDao userDaoImpl = new UserDaoHibernateImpl();
+
+        userDaoImpl.createUsersTable();
+        userDaoImpl.saveUser("Anton", "Sukhankin", (byte) 22);
+        userDaoImpl.saveUser("Geralt", "of Rivia", (byte) 100);
+        userDaoImpl.saveUser("Yennefer", "of Vengerberg", (byte) 95);
+        userDaoImpl.saveUser("Yarpen", "Zigrin", (byte) 42);
+        List<User> list = userDaoImpl.getAllUsers();
         System.out.println(list);
-        userDaoJDBC.cleanUsersTable();
-        userDaoJDBC.dropUsersTable();
+        userDaoImpl.cleanUsersTable();
+        userDaoImpl.dropUsersTable();
 
     }
 
